@@ -11,7 +11,7 @@ import lombok.Data;
 public class UserDto {
 
 	private String email;
-	private String pwd;
+	private String password;
 	private String name;
 	private String userId;
 	private LocalDate createDate;

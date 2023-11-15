@@ -109,4 +109,10 @@ public class UserRestController {
 		
 	}
 	
+	@PostMapping("/login")
+	public ResponseEntity<ResponseUserVo> login(@RequestBody RequestUserVo userVo){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(new ModelMapper().map(new UserDto(), ResponseUserVo.class));
+	}
+	
 }
