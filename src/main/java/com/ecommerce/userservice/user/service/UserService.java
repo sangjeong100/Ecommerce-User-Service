@@ -1,9 +1,11 @@
 package com.ecommerce.userservice.user.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import com.ecommerce.userservice.user.domain.dto.UserDto;
 import com.ecommerce.userservice.user.domain.jpa.entity.UserEntity;
 
-public interface UserService {
+public interface UserService extends UserDetailsService{
 	
 	/* 유저 생성 */
 	UserDto createUser(UserDto userDto);

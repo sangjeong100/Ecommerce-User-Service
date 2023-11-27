@@ -22,6 +22,7 @@ import com.ecommerce.userservice.user.domain.jpa.entity.UserEntity;
 import com.ecommerce.userservice.user.domain.vo.RequestUserVo;
 import com.ecommerce.userservice.user.domain.vo.ResponseUserVo;
 import com.ecommerce.userservice.user.service.UserService;
+import com.google.common.net.MediaType;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +46,12 @@ public class UserRestController {
 	
 	@GetMapping("/health_check")
 	public String status(HttpServletRequest request) {
-		return String.format("It's Working in User Service on Port %s", request.getServerPort());
+		return String.format("It's Working in User Service"
+				+", port(local.server.port)=" + env.getProperty("local.server.port")
+				+", port(server.port)=" + env.getProperty("server.port")
+				+", with token secret=" + env.getProperty("token.secret")
+				+", with token time=" + env.getProperty("token.expiration_time")
+				);
 	}
 	
 	@GetMapping("/welcome")
@@ -100,7 +106,7 @@ public class UserRestController {
 	 * @param userId
 	 * @return
 	 */
-	@GetMapping("/users/{userId}")
+	@GetMapping(value = "/users/{userId}")
 	public ResponseEntity<ResponseUserVo> getUserByUserId(@PathVariable("userId") String userId){
 		
 		UserDto userDto = userService.getUserByUserId(userId);
